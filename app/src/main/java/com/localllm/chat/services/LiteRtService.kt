@@ -71,8 +71,18 @@ object LiteRtRuntime {
         return loaded
     }
 
-    private fun start(model: File, cacheDir: File, backend: Backend) =
-        Engine(EngineConfig(modelPath = model.path, backend = backend, cacheDir = cacheDir.path)).apply { initialize() }
+    private fun start(model: File, cacheDir: File, backend: Backend): Engine {
+        val engine = Engine(EngineConfig(modelPath = model.path, backend = backend, cacheDir = cacheDir.path))
+        engine.initialize()
+        try {
+            // Missing GPU support (such as no OpenCL) only surfaces once decoding starts.
+            if (backend is Backend.GPU) engine.createConversation().use { it.sendMessage("Hi", maxOutputToken = 1) }
+        } catch (e: Exception) {
+            engine.close()
+            throw e
+        }
+        return engine
+    }
 
     private fun release() {
         engine?.close()

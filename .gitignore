@@ -25,19 +25,7 @@ google-services.json
 
 # Android Studio / IntelliJ
 *.iml
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/shelf/
-.idea/caches/
-.idea/libraries/
-.idea/modules.xml
-.idea/modules/
-.idea/navEditor.xml
-.idea/assetWizardSettings.xml
-.idea/deploymentTargetDropDown.xml
-.idea/deploymentTargetSelector.xml
-.idea/gradle.xml
-.idea/dictionaries/
+.idea/
 captures/
 .navigation/
 .externalNativeBuild/
